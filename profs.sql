@@ -18,59 +18,52 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `notes`
+-- Base de données : `profs`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `notes`
+-- Structure de la table `profs`
 --
 
-CREATE TABLE `notes` (
-  `Id` int(11) NOT NULL,
-  `Matiere` text NOT NULL,
-  `Note` int(11) NOT NULL,
-  `Id_eleve` int(11) DEFAULT NULL,
-  `Id_prof` int(11) DEFAULT NULL
+CREATE TABLE `profs` (
+  `Id_prof` int(11) NOT NULL,
+  `Nom` text NOT NULL,
+  `Prenom` text NOT NULL,
+  `identifiant` text DEFAULT NULL,
+  `mdp` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `notes`
+-- Déchargement des données de la table `profs`
 --
 
-INSERT INTO `notes` (`Id`, `Matiere`, `Note`, `Id_eleve`, `Id_prof`) VALUES
-(1, 'Anglais', 11, 1, 2),
-(2, 'Anglais', 15, 2, 2),
-(3, 'Anglais', 15, 3, 2),
-(4, 'Maths', 17, 1, 3),
-(5, 'Maths', 13, 2, 3),
-(6, 'Maths', 14, 3, 3),
-(7, 'Cognitique', 11, 1, 4),
-(8, 'Cognitique', 12, 2, 4),
-(9, 'Cognitique', 10, 3, 4),
-(10, 'Informatique', 16, 2, 1),
-(11, 'Informatique', 17, 3, 1);
+INSERT INTO `profs` (`Id_prof`, `Nom`, `Prenom`, `identifiant`, `mdp`) VALUES
+(1, 'Placin', 'Frederic', 'fplacin', NULL),
+(2, 'Ricain', 'Amy', 'aricain', NULL),
+(3, 'Pluzin', 'Justin', 'jpluzin', NULL),
+(4, 'Tique', 'Coline', 'ctique', NULL);
 
 --
 -- Index pour les tables déchargées
 --
 
 --
--- Index pour la table `notes`
+-- Index pour la table `profs`
 --
-ALTER TABLE `notes`
-  ADD PRIMARY KEY (`Id`);
+ALTER TABLE `profs`
+  ADD PRIMARY KEY (`Id_prof`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `notes`
+-- AUTO_INCREMENT pour la table `profs`
 --
-ALTER TABLE `notes`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `profs`
+  MODIFY `Id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
