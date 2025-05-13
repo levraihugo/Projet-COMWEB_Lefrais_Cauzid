@@ -69,7 +69,7 @@ function App() {
     setID(document.getElementById("identifiant").value)
     setMdp(document.getElementById("mdp").value)
     setRole(document.getElementById("role").value)
-    let url = `https://localhost/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?id=${identifiant}&mdp=${mdp}&role=${role}`;
+    let url = `https://localhost/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`;
     fetch(url)
       .then(r => r.json())
       .then(datas => { setData(datas) })
