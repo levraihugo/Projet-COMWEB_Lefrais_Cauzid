@@ -15,7 +15,7 @@ function Bouton(Props) {
 function Identifiant(Props) {
   return (
     <div>
-      <label for="Identifiant">Identifiant : </label>
+      <label >Identifiant : </label>
       <input type="text" id="identifiant" name="identifiant"></input>
     </div>
   )
@@ -24,7 +24,7 @@ function Identifiant(Props) {
 function Mdp(Props) {
   return (
     <div>
-      <label for="mdp">Mot de passe : </label>
+      <label >Mot de passe : </label>
       <input type="password" id="mdp" name="mdp"></input>
     </div>
   )
@@ -67,13 +67,14 @@ function App() {
 
   const acces = function () {
     setID(document.getElementById("identifiant").value)
+    Console.log(document.getElementById("identifiant").value)
     setMdp(document.getElementById("mdp").value)
     setRole(document.getElementById("role").value)
     let url = `https://localhost/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`;
     fetch(url)
       .then(r => r.json())
       .then(datas => { setData(datas) })
-    if (datas.length == 0) {
+    if (data.length == 0) {
       setState(false)
     }
     else {
