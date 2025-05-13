@@ -29,10 +29,10 @@
     // Choix de la base en fonction du rôle
     if ($role === 'professeur') {
         $bdd = new PDO('mysql:host=' . $host . ';dbname=profs;charset=utf8', $username, $password);
-        $requete = $bdd->prepare("SELECT * FROM profs WHERE identifiant = ? AND mdp = ?");
+        $requete = $bdd->prepare("SELECT * FROM profs WHERE identifiant : \"$identifiant\" AND mdp = $mdp");
     } elseif ($role === 'eleve') {
         $bdd = new PDO('mysql:host=' . $host . ';dbname=eleves;charset=utf8', $username, $password);
-        $requete = $bdd->prepare("SELECT * FROM eleves WHERE identifiant = ? AND mdp = ?");
+        $requete = $bdd->prepare("SELECT * FROM eleves WHERE identifiant = $identifiant AND mdp = $mdp");
     } 
 
     $requete->execute([$identifiant, $mdp]);
@@ -45,7 +45,7 @@
 
             // Connexion à la BDD des notes
             $bddNotes = new PDO("mysql:host=$host;dbname=$dbnameNotes;charset=utf8", $username, $password);
-            $noteQuery = $bddNotes->prepare("SELECT Matiere, Note FROM notes WHERE Id_eleve = ?");
+            $noteQuery = $bddNotes->prepare("SELECT Matiere, Note FROM notes WHERE Id_eleve : $identifiant");
             $noteQuery->execute([$idEleve]);
             $notes = $noteQuery->fetchAll(PDO::FETCH_ASSOC);
 
