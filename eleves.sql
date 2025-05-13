@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 07 mai 2025 à 15:46
+-- Généré le : mar. 13 mai 2025 à 17:33
 -- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Version de PHP : 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,9 +40,9 @@ CREATE TABLE `eleves` (
 --
 
 INSERT INTO `eleves` (`Id_eleve`, `Nom`, `Prenom`, `identifiant`, `mdp`) VALUES
-(1, 'O\'Twalett', 'Eva', 'eotwalett', NULL),
-(2, 'Party', 'Paul', 'pparty', NULL),
-(3, 'Comm', 'Paul', 'pcomm', NULL);
+(1, 'O\'Twalett', 'Eva', 'eotwalett', 'eva123'),
+(2, 'Party', 'Paul', 'pparty', 'paul456'),
+(3, 'Comm', 'Paul', 'pcomm', 'paul789');
 
 --
 -- Index pour les tables déchargées

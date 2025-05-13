@@ -17,24 +17,22 @@
     try{
         $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',$username,$password);
         echo 'connexion établie <br>'; //vérifie la connexion
+
     }catch (PDOException $e) {
         die("Erreur de connexion : " . $e->getMessage());
     }
 
 
 
-    // $id_eleve = $_GET['id_eleve']; // ou via POST si vous préférez
+    echo "<h2> Notes de l'élève : ID".$identifiant."</h2>";
 
-    // $sql = "SELECT matiere, note FROM Notes WHERE id_eleve = ?";
-    // $stmt = $bdd->prepare($sql);
-    // $stmt->execute([$id_eleve]);
-    // $Notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // echo json_encode($Notes);
-
-    $requete ='SELECT matiere, note FROM Notes WHERE matiere like "Anglais"';
+    $requete ='SELECT Matiere, Note FROM notes WHERE Id_eleve : identifiant';
     $resultat = $bdd->query($requete);
     $tableau = $resultat->fetchall();
+
+    foreach($tableau as $cellule){
+        echo $cellule['Note']."     ".$cellule['Matiere']."<br>";
+    }
 
     
     ?>
