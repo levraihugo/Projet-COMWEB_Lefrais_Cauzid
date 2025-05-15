@@ -42,15 +42,27 @@ function Profession({onChange}) {
   )
 }
 
-function AffichageNotes({notes}) {
+function AffichageNotes({prenom, nom, notes}) {
   return (
     <>
-      <p>Matière______Note</p>
-      <ul>
-        {notes.map((note, index) => (
-          <li key={index}>{note.Matiere} - {note.Note}</li>
-        ))}
-      </ul>
+    <h2>Bienvenue {prenom} {nom} !</h2>
+        <p>Voici vos notes :</p>
+          <table>
+           <thead>
+            <tr>
+              <th>Matière</th>
+              <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notes.map((note, index) => (
+                <tr key={index}>
+                  <td>{note.Matiere}</td>
+                  <td>{note.Note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
     </>
   );
 }
@@ -64,8 +76,7 @@ function App() {
   const [identifiant, setID] = useState('')
   const [mdp, setMdp] = useState('')
   const [role, setRole] = useState('')
-  const [hasNotes, setState] = useState(false)
-
+  
   const acces = () => {
     const url = `http://localhost/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
     fetch(url)
@@ -78,11 +89,20 @@ function App() {
 
   return (
     <>
-      <Identifiant onChange={(e) => setID(e.target.value)} />
-      <Mdp onChange={(e) => setMdp(e.target.value)} />
-      <Profession onChange={(e) => setRole(e.target.value)} />
-      <Bouton cliquer={acces} />
-      {data && data.notes && <AffichageNotes notes={data.notes} />}
+      {!data || data.success === false ? (
+        <>
+          <Identifiant onChange={(e) => setID(e.target.value)} />
+          <Mdp onChange={(e) => setMdp(e.target.value)} />
+          <Profession onChange={(e) => setRole(e.target.value)} />
+          <Bouton cliquer={acces} />
+          {data && data.message && <p style={{ color: "red" }}>{data.message}</p>}
+        </>
+      ) : (
+        <>
+          {data.role === 'eleve' && <AffichageNotes nom={data.nom} prenom={data.prenom} notes={data.notes} />}
+          {data.role === 'professeur' && <h2>Bienvenue {data.prenom} {data.nom} (Professeur)</h2>}
+        </>
+      )}
     </>
   )
 }

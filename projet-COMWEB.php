@@ -3,7 +3,7 @@
     header("Content-Type: application/json; charset=UTF-8");
     
     $host='localhost'; //variables de connexion
-    $dbname='Notes'; //mettre nom de la table sql
+    $dbname='notes'; //mettre nom de la table sql
     $username='root'; //pourquoi on met root là ?
     $password=''; 
     //tentative de connexion à la base de données
@@ -17,7 +17,7 @@
     if (!$identifiant || !$mdp || !$role) {
         echo json_encode(['success' => false, 'message' => 'Paramètres manquants.']);
         exit();
-}
+    }
 
     try {
     // Choix de la base en fonction du rôle
@@ -33,13 +33,13 @@
     $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
 
     if ($utilisateur) {
-        if ($role === 'eleve') {
+        if ($role === 'eleves') {
             // Récupérer les notes si c'est un élève
             $idEleve = $utilisateur['Id_eleve'];
 
             // Connexion à la BDD des notes
             $bddNotes = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-            $noteQuery = $bddNotes->prepare("SELECT Matiere, Note FROM notes WHERE Id_eleve = :id");
+            $noteQuery = $bddNotes->prepare("SELECT Matiere, Note FROM notes WHERE Id = :id");
             $noteQuery->execute(['id' => $idEleve]);
             $notes = $noteQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -62,9 +62,9 @@
         echo json_encode(['success' => false, 'message' => 'Identifiants invalides.']);
     }
 
-} catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => 'Erreur de connexion : ' . $e->getMessage()]);
-}
-    
+    } catch (PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur de connexion : ' . $e->getMessage()]);
+    }
+
 ?>
 
