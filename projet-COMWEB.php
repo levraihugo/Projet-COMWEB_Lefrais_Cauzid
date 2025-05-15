@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-    <?php
+<?php
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json; charset=UTF-8");
+    
     $host='localhost'; //variables de connexion
     $dbname='Notes'; //mettre nom de la table sql
     $username='root'; //pourquoi on met root là ?
@@ -27,15 +21,15 @@
 
     try {
     // Choix de la base en fonction du rôle
-    if ($role === 'professeur') {
+    if ($role === 'profs') {
         $bdd = new PDO('mysql:host=' . $host . ';dbname=profs;charset=utf8', $username, $password);
-        $requete = $bdd->prepare("SELECT * FROM profs WHERE identifiant : \"$identifiant\" AND mdp = $mdp");
-    } elseif ($role === 'eleve') {
+        $requete = $bdd->prepare("SELECT * FROM profs WHERE identifiant = :identifiant AND mdp = :mdp");
+    } elseif ($role === 'eleves') {
         $bdd = new PDO('mysql:host=' . $host . ';dbname=eleves;charset=utf8', $username, $password);
-        $requete = $bdd->prepare("SELECT * FROM eleves WHERE identifiant = $identifiant AND mdp = $mdp");
+        $requete = $bdd->prepare("SELECT * FROM eleves WHERE identifiant = :identifiant AND mdp = :mdp");
     } 
 
-    $requete->execute([$identifiant, $mdp]);
+    $requete->execute(['identifiant' => $identifiant, 'mdp' => $mdp]);
     $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
 
     if ($utilisateur) {
@@ -44,9 +38,9 @@
             $idEleve = $utilisateur['Id_eleve'];
 
             // Connexion à la BDD des notes
-            $bddNotes = new PDO("mysql:host=$host;dbname=$dbnameNotes;charset=utf8", $username, $password);
-            $noteQuery = $bddNotes->prepare("SELECT Matiere, Note FROM notes WHERE Id_eleve : $identifiant");
-            $noteQuery->execute([$idEleve]);
+            $bddNotes = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+            $noteQuery = $bddNotes->prepare("SELECT Matiere, Note FROM notes WHERE Id_eleve = :id");
+            $noteQuery->execute(['id' => $idEleve]);
             $notes = $noteQuery->fetchAll(PDO::FETCH_ASSOC);
 
             echo json_encode([
@@ -71,22 +65,6 @@
 } catch (PDOException $e) {
     echo json_encode(['success' => false, 'message' => 'Erreur de connexion : ' . $e->getMessage()]);
 }
-
-
-
-    // echo "<h2> Notes de l'élève : ID".$identifiant."</h2>";
-
-    // $requete ='SELECT Matiere, Note FROM notes WHERE Id_eleve : identifiant';
-    // $resultat = $bdd->query($requete);
-    // $tableau = $resultat->fetchall();
-
-    // foreach($tableau as $cellule){
-    //     echo $cellule['Note']."     ".$cellule['Matiere']."<br>";
-    // }
-
     
-    ?>
-
-</body>
-</html>
+?>
 
