@@ -3,9 +3,9 @@
     header("Content-Type: application/json; charset=UTF-8");
     
     $host='localhost'; //variables de connexion
-    $dbname='notes'; //mettre nom de la table sql
-    $username='root'; //pourquoi on met root là ?
-    $password=''; 
+    $dbname='hcauzid'; //mettre nom de la table sql
+    $username='hcauzid'; //pourquoi on met root là ?
+    $password='simple'; 
     //tentative de connexion à la base de données
     $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
 

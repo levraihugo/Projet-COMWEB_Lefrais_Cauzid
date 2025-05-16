@@ -107,9 +107,10 @@ function App() {
   const [role, setRole] = useState('')
 
   const acces = () => {
-    const url = `http://localhost/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
+    // const url = `http://localhost/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
     // pour Jeanne la best
     // const url = `http://localhost/Projet/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
+    const url = `https://hcauzid.zzz.bordeaux-inp.fr/comweb/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
     // pour Hugo
     fetch(url)
       .then(r => r.json())
