@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 
-function Bouton({cliquer}) {
+function Bouton({ cliquer }) {
   return (
     <p>
       <button onClick={cliquer}>
@@ -12,7 +12,7 @@ function Bouton({cliquer}) {
   )
 }
 
-function Identifiant({onChange}) {
+function Identifiant({ onChange }) {
   return (
     <div>
       <label >Identifiant : </label>
@@ -21,7 +21,7 @@ function Identifiant({onChange}) {
   )
 }
 
-function Mdp({onChange}) {
+function Mdp({ onChange }) {
   return (
     <div>
       <label >Mot de passe : </label>
@@ -30,39 +30,68 @@ function Mdp({onChange}) {
   )
 }
 
-function Profession({onChange}) {
+function Profession({ onChange }) {
   return (
     <div>
       <p>Vous êtes :</p>
       <input type='radio' name='role' value="eleves" onChange={onChange}></input>
       <label>Élève</label>
-      <input type='radio'  name='role' value="profs" onChange={onChange}></input>
+      <input type='radio' name='role' value="profs" onChange={onChange}></input>
       <label>Professeur</label>
     </div>
   )
 }
 
-function AffichageNotes({prenom, nom, notes}) {
+function AffichageNotesEleve({ prenom, nom, notes }) {
   return (
     <>
-    <h2>Bienvenue {prenom} {nom} !</h2>
-        <p>Voici vos notes :</p>
-          <table>
-           <thead>
-            <tr>
-              <th>Matière</th>
-              <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              {notes.map((note, index) => (
-                <tr key={index}>
-                  <td>{note.Matiere}</td>
-                  <td>{note.Note}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <h2>Bienvenue {prenom} {nom} !</h2>
+      <p>Voici vos notes :</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Matière</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          {notes.map((note, index) => (
+            <tr key={index}>
+              <td>{note.Matiere}</td>
+              <td>{note.Note}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+}
+
+function AffichageNotesProf({ prenom, nom, notes }) {
+  return (
+    <>
+      <h2>Bienvenue {prenom} {nom} (Professeur)!</h2>
+      <p>Voici vos notes attribuées:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Matière</th>
+            <th>Note</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+          </tr>
+        </thead>
+        <tbody>
+          {notes.map((note, index) => (
+            <tr key={index}>
+              <td>{note.Matiere}</td>
+              <td>{note.Note}</td>
+              <td>{note.Nom}</td>
+              <td>{note.Prenom}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
@@ -76,9 +105,12 @@ function App() {
   const [identifiant, setID] = useState('')
   const [mdp, setMdp] = useState('')
   const [role, setRole] = useState('')
-  
+
   const acces = () => {
     const url = `http://localhost/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
+    // pour Jeanne la best
+    // const url = `http://localhost/Projet/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
+    // pour Hugo
     fetch(url)
       .then(r => r.json())
       .then(datas => {
@@ -99,8 +131,9 @@ function App() {
         </>
       ) : (
         <>
-          {data.role === 'eleve' && <AffichageNotes nom={data.nom} prenom={data.prenom} notes={data.notes} />}
-          {data.role === 'professeur' && <h2>Bienvenue {data.prenom} {data.nom} (Professeur)</h2>}
+          {data.role === 'eleve' && <AffichageNotesEleve nom={data.nom} prenom={data.prenom} notes={data.notes} />}
+          {data.role === 'professeur' && <AffichageNotesProf nom={data.nom} prenom={data.prenom} notes={data.notes} />}
+          {/* {data.role === 'professeur' && <h2>Bienvenue {data.prenom} {data.nom} (Professeur)</h2>} */}
         </>
       )}
     </>
