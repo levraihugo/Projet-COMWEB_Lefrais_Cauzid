@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import './App.css'
+import scoreImg from './assets/score.png';
 
+function Logo(){
+  return(
+    <div><img style={{width:"30%"}}src={scoreImg} alt='texteauhasard'/><br/><br/></div>
+  )
+}
 
 function Bouton({ cliquer }) {
   return (
@@ -121,6 +127,7 @@ function App() {
 
   return (
     <>
+      <Logo/>
       {!data || data.success === false ? (
         <>
           <Identifiant onChange={(e) => setID(e.target.value)} />
