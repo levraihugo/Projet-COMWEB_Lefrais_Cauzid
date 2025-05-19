@@ -47,18 +47,18 @@ function AffichageNotesEleve({ prenom, nom, notes }) {
     <>
       <h2>Bienvenue {prenom} {nom} !</h2>
       <p>Voici vos notes :</p>
-      <table>
+      <table style={{ border: "black solid 1px", marginLeft: "auto", marginRight: "auto", borderCollapse: "collapse" }}>
         <thead>
-          <tr>
-            <th>Matière</th>
-            <th>Note</th>
+          <tr style={{ border: "black solid 1px" }}>
+            <th style={{ border: "black solid 1px" }}>Matière</th>
+            <th style={{ border: "black solid 1px" }}>Note</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={{ border: "black solid 1px" }}>
           {notes.map((note, index) => (
-            <tr key={index}>
-              <td>{note.Matiere}</td>
-              <td>{note.Note}</td>
+            <tr key={index} style={{ border: "black solid 1px" }}>
+              <td style={{ border: "black solid 1px" }}>{note.Matiere}</td>
+              <td style={{ border: "black solid 1px" }}>{note.Note}</td>
             </tr>
           ))}
         </tbody>
@@ -72,22 +72,22 @@ function AffichageNotesProf({ prenom, nom, notes }) {
     <>
       <h2>Bienvenue {prenom} {nom} (Professeur)!</h2>
       <p>Voici vos notes attribuées:</p>
-      <table>
+      <table style={{ border: "black solid 1px", marginLeft: "auto", marginRight: "auto", borderCollapse: "collapse" }}>
         <thead>
-          <tr>
-            <th>Matière</th>
-            <th>Note</th>
-            <th>Nom</th>
-            <th>Prenom</th>
+          <tr style={{ border: "black solid 1px" }}>
+            <th style={{ border: "black solid 1px" }}>Matière</th>
+            <th style={{ border: "black solid 1px" }}>Note</th>
+            <th style={{ border: "black solid 1px" }}>Nom</th>
+            <th style={{ border: "black solid 1px" }}>Prenom</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={{ border: "black solid 1px" }}>
           {notes.map((note, index) => (
-            <tr key={index}>
-              <td>{note.Matiere}</td>
-              <td>{note.Note}</td>
-              <td>{note.Nom}</td>
-              <td>{note.Prenom}</td>
+            <tr key={index} style={{ border: "black solid 1px" }}>
+              <td style={{ border: "black solid 1px" }}>{note.Matiere}</td>
+              <td style={{ border: "black solid 1px" }}>{note.Note}</td>
+              <td style={{ border: "black solid 1px" }}>{note.Nom}</td>
+              <td style={{ border: "black solid 1px" }}>{note.Prenom}</td>
             </tr>
           ))}
         </tbody>
