@@ -57,7 +57,7 @@
                 'notes' => $notes
             ]);
         } else {
-            // Récupérer les notes si c'est un élève
+            // Récupérer les notes si c'est un prof
             $idProf = $utilisateur['Id_prof'];
             
             // Connexion à la BDD des notes
