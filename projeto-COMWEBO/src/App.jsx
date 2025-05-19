@@ -120,8 +120,9 @@ function App() {
     // const url = `http://localhost/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
     // pour Jeanne la best
     // const url = `http://localhost/Projet/Projet-COMWEB_Lefrais_Cauzid/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
-    const url = `https://hcauzid.zzz.bordeaux-inp.fr/comweb/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
     // pour Hugo
+    const url = `https://hcauzid.zzz.bordeaux-inp.fr/comweb/projet-COMWEB.php?identifiant=${identifiant}&mdp=${mdp}&role=${role}`
+    // pour utiliser sur ZZZ
     fetch(url)
       .then(r => r.json())
       .then(datas => {
@@ -145,7 +146,6 @@ function App() {
         <>
           {data.role === 'eleve' && <AffichageNotesEleve nom={data.nom} prenom={data.prenom} notes={data.notes} />}
           {data.role === 'professeur' && <AffichageNotesProf nom={data.nom} prenom={data.prenom} notes={data.notes} />}
-          {/* {data.role === 'professeur' && <h2>Bienvenue {data.prenom} {data.nom} (Professeur)</h2>} */}
         </>
       )}
     </>
